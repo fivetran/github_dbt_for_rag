@@ -9,4 +9,5 @@ sources:
       - name: issue_assignee
       - name: issue_comment
       - name: issue_label
+      - name: label
       - name: user
