@@ -23,7 +23,7 @@ issue_details AS (
         i.state,
         i.title,
         i.body, 
-        u.login,
+        COALESCE(u.login, 'UNKNOWN USER') as login,
         COALESCE(ag.assignees, 'No one assigned') as assignees,
         COALESCE(lg.labels, 'None yet') as labels
     FROM {{ source('github','issue') }} i
@@ -36,11 +36,11 @@ SELECT
     id,
     CONCAT(
         '# ', title, ' (#', number, ')\n\n',
-        'Opened by ', login, ' on ', created_at, '\n',
-        'Assigned to : ', assignees, '\n',
-        'Labels : ', labels, '\n',
-        'Last updated on ', updated_at, '\n',
-        'Issue is currently ', state, '\n\n',
-        '## DESCRIPTION : \n', body, '\n'
+        'Opened by ', login, ' on ', created_at, '\n\n',
+        'Assigned to : ', assignees, '\n\n',
+        'Labels : ', labels, '\n\n',
+        'Last updated on ', updated_at, '\n\n',
+        'Issue is currently ', state, '\n\n\n',
+        '## DESCRIPTION : \n', body, '\n\n'
     ) AS content
 FROM issue_details

@@ -1,10 +1,16 @@
+with issue_comments_collected AS (
+    SELECT 
+        issue_id,
+        LISTAGG(content , '\n\n\n') WITHIN GROUP (ORDER BY created_at) as content
+    FROM {{ ref('issue_comment_concatenated') }}
+    GROUP BY issue_id
+)
 SELECT 
     ic.id,
     CONCAT(
         ic.content, 
-        '\n\n---\n\n'
-        LISTAGG(icc.content , '\n\n---\n\n') WITHIN GROUP (ORDER BY icc.created_at)
+        '\n\n\n',
+        icc.content
     ) AS content
 FROM {{ ref('issue_concatenated') }} ic
-JOIN {{ ref('issue_comment_concatenated') }} icc ON ic.id = icc.issue_id
-GROUP BY ic.id
+JOIN issue_comments_collected icc ON ic.id = icc.issue_id
