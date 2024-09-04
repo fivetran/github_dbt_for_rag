@@ -10,7 +10,7 @@ SELECT
     CONCAT(
         ic.content, 
         '\n\n\n',
-        icc.content
+        COALESCE(icc.content, '')
     ) AS content
 FROM {{ ref('issue_concatenated') }} ic
-JOIN issue_comments_collected icc ON ic.id = icc.issue_id
+LEFT JOIN issue_comments_collected icc ON ic.id = icc.issue_id
