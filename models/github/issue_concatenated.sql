@@ -42,5 +42,5 @@ SELECT
         'Last updated on ', updated_at, '\n',
         'Issue is currently ', state, '\n\n',
         '## DESCRIPTION : \n', body, '\n'
-    ) AS issue_content
+    ) AS content
 FROM issue_details
