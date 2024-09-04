@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+
+  - name: github
+    schema: github
+    tables:
+      - name: issue
+      - name: issue_assignee
+      - name: issue_comment
+      - name: user
