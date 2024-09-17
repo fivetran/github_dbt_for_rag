@@ -1,3 +1,9 @@
+{{ config(
+    constraints={
+        'primary_key': ['id']
+    }
+) }}
+
 SELECT 
     i.id,
     i.created_at,
