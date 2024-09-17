@@ -2,7 +2,6 @@
     constraints={
         'primary_key': ['id']
     },
-    cluster_by=['id'],
     post_hook=[
       "ALTER TABLE {{ this }} ADD PRIMARY KEY (id)"
     ]

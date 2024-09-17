@@ -1,3 +1,9 @@
+{{ config(
+    constraints={
+        'primary_key': ['id']
+    }
+) }}
+
 with issue_comments_collected AS (
     SELECT 
         issue_id,
